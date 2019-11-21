@@ -4,13 +4,15 @@ const router = express.Router();
 // Item Model 
 const Item = require('../../models/item');
 
+// console.log(Item.model('item'))
+
 // @route   GET api/items
 // @desc    Get All items
 // @access  Public
 router.get('/', (req, res) => {
-    Item.find()
-        .sort({ date: -1})
-        .then(items => res.json(items));
+  Item.find()
+    .sort({ date: -1})
+    .then(items => res.json(items));
 });
 
 // @route   POST api/items
@@ -18,7 +20,14 @@ router.get('/', (req, res) => {
 // @access  Public
 router.post('/', (req, res) => {
     const newItem = new Item({
-        name: req.body.name
+      sku: req.body.sku,
+      name: req.body.name,
+      description: req.body.description,
+      quantity: req.body.quantity,
+      pricing: {
+        purchase_price: req.body.pricing.purchase_price,
+        sale_price: req.body.pricing.sale_price,
+      }
     });
 
     newItem.save().then(item => res.json(item));

@@ -18,7 +18,7 @@ export const addItem = (item) => dispatch =>  {
         type: ADD_ITEMS,
         payload: res.data
       })
-    )
+    ).catch((err) => console.log(err))
 };
 
 export const deleteItem = (id) => dispatch => {

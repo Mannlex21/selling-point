@@ -15,7 +15,12 @@ import { addItem } from '../actions/itemActions';
 class ItemModal extends Component {
   state = {
     modal: false,
-    name: ''
+    sku: '',
+    name: '',
+    description: '',
+    quantity: null,
+    purchase_price: null,
+    sale_price: null
   }
 
   toggle = () => {
@@ -25,21 +30,30 @@ class ItemModal extends Component {
   };
 
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    const { name, value, type } = e.target;
+
+    this.setState({ [name]: type === "number" ? parseInt(value, 10) : value });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
 
     const newItem = {
-      name: this.state.name
+      sku: this.state.sku,
+      name: this.state.name,
+      description: this.state.description,
+      quantity: this.state.quantity,
+      pricing: {
+        purchase_price: this.state.purchase_price,
+        sale_price: this.state.sale_price,
+      }
     }
-
+    console.log(newItem)
     // Add item via addItem action
     this.props.addItem(newItem);
 
     // Close modal
-    this.toggle();
+    // this.toggle();
   }
 
   render() {
@@ -66,9 +80,38 @@ class ItemModal extends Component {
                 <Label for="item">Item</Label>
                 <Input 
                   type="text"
+                  name="sku"
+                  placeholder="sku"
+                  onChange={this.onChange}
+                ></Input>
+                <Input 
+                  type="text"
                   name="name"
-                  id="item"
-                  placeholder="Add shopping item"
+                  placeholder="name"
+                  onChange={this.onChange}
+                ></Input>
+                <Input 
+                  type="text"
+                  name="description"
+                  placeholder="description"
+                  onChange={this.onChange}
+                ></Input>
+                <Input 
+                  type="number"
+                  name="quantity"
+                  placeholder="quantity"
+                  onChange={this.onChange}
+                ></Input>
+                <Input 
+                  type="number"
+                  name="purchase_price"
+                  placeholder="purchase_price"
+                  onChange={this.onChange}
+                ></Input>
+                <Input 
+                  type="number"
+                  name="sale_price"
+                  placeholder="sale_price"
                   onChange={this.onChange}
                 ></Input>
                 <Button
