@@ -15,14 +15,14 @@ class ShoppingList extends Component {
     this.props.deleteItem(id);
   }
 
-  render() { 
+  render() {
     const { items } = this.props.item;
 
     return (
       <Container>
         <ListGroup>
           <TransitionGroup className="shopping-list">
-            { 
+            {
               items.map(({ _id, name }) => (
                 <CSSTransition key={ _id } timeout={500} classNames="fade">
                   <ListGroupItem>
@@ -43,7 +43,7 @@ class ShoppingList extends Component {
     );
   }
   }
-  
+
   ShoppingList.protoTypes = {
     getItems: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired

@@ -21,7 +21,7 @@ class App extends Component {
         </div>
       </Provider>
     );
-  } 
+  }
 }
 
 export default App;
