@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/itemActions';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 import ItemModal from '../components/ItemModal';
+import ItemProduct from '../components/item-product';
 
 class Product extends Component {
 
@@ -12,23 +12,12 @@ class Product extends Component {
   }
 
   render() {
-    const { items } = this.props.item;
-
     return (
       <div>
         <label>Productos</label>
         <ItemModal></ItemModal>
-          <Row>
-          {
-            items.map(({ _id, name }) => (
-              <Col sm={3}>
-                <div key={ _id } className="div-item" >
-                  <label>{name}</label>
-                </div>
-              </Col>
-            ))
-          }
-          </Row>
+        <ItemProduct></ItemProduct>
+          
       </div>
     );
   }
