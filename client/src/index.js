@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppNavbar from './components/AppNavbar';
 import { Routes } from './routes.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './store';

@@ -1,38 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/itemActions';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import cereal from '../assets/img/cereal.png';
 
 class ItemProduct extends Component {
   state = {
-    modal: false,
-    sku: '',
-    name: '',
-    description: '',
-    quantity: null,
-    purchase_price: null,
-    sale_price: null
+    buttons: false,
   }
 
   componentDidMount() {
-    this.props.getItems();
+
   }
 
+  onViewOptions = param => event => {
+    console.log(param, event)
+    this.setState({
+      active: !this.state.active
+    });
+  }
+
+  onCloseOptions = e => {
+    this.setState({
+      active: !this.state.active
+    });
+  };
+
   render() {
-    const { items } = this.props.item;
+    const itemPassed = this.props.itemPassed;
 
     return (
-      <Row>
-        {
-          items.map(({ _id, name }) => (
-            <Col sm={3}>
-              <div key={ _id } className="div-item" >
-                <label>{name}</label>
-              </div>
-            </Col>
-          ))
-        }
-      </Row>
+      <Col sm={2}>
+        <div className="div-item sh-container sh-effect--delta">
+          <div id={ itemPassed._id } className="div-product" onClick={this.onViewOptions(itemPassed)} >
+            <div className="div-img-product">
+              <img src={ cereal } alt="cereal"></img>
+            </div>
+            <label>{itemPassed.name}</label>
+          </div>
+          <div className={`div-buttons sh-effect--delta__overlay ${this.state.active? 'active': ''}`} onClick={this.onCloseOptions}>
+            <div className="sh-effect--delta__overlay-inside">
+              <div className="sh-effect--delta__button">View</div>
+              <div className="sh-effect--delta__meta">Editar</div>
+              <div className="sh-effect--delta__meta">Borrar</div>
+              <div className="sh-effect--delta__meta">Atras</div>
+            </div>
+          </div>
+        </div>
+      </Col>
     );
   }
 }
@@ -42,3 +57,18 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getItems })(ItemProduct);
+
+/* <Row>
+  {
+    items.map((item) => (
+      <Col key={ item._id } sm={2} onClick={ this.props.onViewOptions(null, item) }>
+        <div id={item._id} className="div-item" >
+          <div className="div-img-product">
+            <img src={ cereal } alt="cereal"></img>
+          </div>
+          <label>{item.name}</label>
+        </div>
+      </Col>
+    ))
+  }
+</Row> */
