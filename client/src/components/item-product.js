@@ -26,6 +26,10 @@ class ItemProduct extends Component {
     });
   };
 
+  onClickOption = (id, tipo) => e => {
+    console.log(id, tipo)
+  };
+
   render() {
     const itemPassed = this.props.itemPassed;
 
@@ -38,12 +42,13 @@ class ItemProduct extends Component {
             </div>
             <label>{itemPassed.name}</label>
           </div>
-          <div className={`div-buttons sh-effect--delta__overlay ${this.state.active? 'active': ''}`} onClick={this.onCloseOptions}>
+          <div className="div-buttons sh-effect--delta__overlay" onClick={this.onCloseOptions}>
             <div className="sh-effect--delta__overlay-inside">
-              <div className="sh-effect--delta__button">View</div>
-              <div className="sh-effect--delta__meta">Editar</div>
-              <div className="sh-effect--delta__meta">Borrar</div>
-              <div className="sh-effect--delta__meta">Atras</div>
+              <div className="div-center">
+                <div className="sh-effect--delta__button" onClick={this.onClickOption(1, 2)}><label>Ver</label></div>
+                <div className="sh-effect--delta__button" onClick={this.onClickOption(1, 2)}><label>Editar</label></div>
+                <div className="sh-effect--delta__button" onClick={this.onClickOption(1, 2)}><label>Borrar</label></div>
+              </div>
             </div>
           </div>
         </div>

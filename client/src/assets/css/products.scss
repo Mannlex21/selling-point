@@ -68,121 +68,139 @@
 
 .sh-effect--delta {
   &::before {
-      content: '';
-      position: absolute;
-      display: block;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(to bottom, #e80202 0%,#f578d4 100%);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      z-index: 5;
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background:#F20C1F,/* linear-gradient(to bottom, #e80202 0%,#f578d4 100%)*/;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 5;
   }
 
   &::after {
-      content: '';
-      position: absolute;
-      display: block;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 70%;
-      opacity: 0.3;
+    content: '';
+    position: absolute;
+    display: block;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 70%;
+    opacity: 0.3;
   }
 
   &:hover {
-      .sh-effect--delta__overlay {
-          transform: translate3d(0,0,0) scale(1);
-          opacity: 1;
-          transition: 0.2s ease;
-      }
+    .sh-effect--delta__overlay {
+    transform: translate3d(0,0,0) scale(1);
+    opacity: 1;
+    transition: 0.2s ease;
+    }
 
-      .sh-effect--delta__meta {
-          transition: 0.2s ease;
-      }
+    .sh-effect--delta__meta {
+    transition: 0.2s ease;
+    }
 
-      .sh-effect--delta__image {
-          transform: scale(1.25) translate3d(0,0,0);
-          transition: 0.2s ease;
-      }
+    .sh-effect--delta__image {
+    transform: scale(1.25) translate3d(0,0,0);
+    transition: 0.2s ease;
+    }
 
-      &::before {
-          opacity: 0.5;
-          visibility: visible;
-          transition: opacity 0.2s ease;
-      }
+    &::before {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease;
+    }
   }
 
   &__image {
-      transform: scale(1.2);
-      transition: transform 0.2s ease;
+    transform: scale(1.2);
+    transition: transform 0.2s ease;
   }
 
   &__overlay {
-      color: #fff;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      bottom: 20px;
-      left: 20px;
-      z-index: 10;
-      transform: scale(0.8);
-      opacity: 0;
-      transition: 0.2s ease;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    transform: scale(0.8);
+    opacity: 0;
+    transition: 0.2s ease;
+    color: #fff;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 
-      @media (min-width: 1200px) {
-          padding: 25px 30px;
-      }
+    @media (min-width: 1200px) {
+    //   padding: 25px 30px;
+    }
   }
 
   &__overlay-inside {
-      padding: 20px;
-      text-align: center;
+    padding: 10px 5px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: table;
 
-      @media (min-width: 1200px) {
-          padding: 40px;
-      }
+    @media (min-width: 1200px) {
+    //   padding: 40px;
+    }
+
+    .div-center {
+        vertical-align: middle;
+        display: table-cell;
+    }
   }
 
   &__title {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 700;
-      transition: 0.2s ease;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    transition: 0.2s ease;
 
-      @media (min-width: 1200px) {
-          font-size: 21px;
-      }
+    @media (min-width: 1200px) {
+        font-size: 21px;
+    }
   }
 
   &__button {
-      color: rgb(255,255,255);
-      transition: 0.2s ease;
-      font-size: 15px;
-      position: relative;
-      z-index: 20;
-      padding: 5px 0 0 0;
-      margin-top: 5px;
+    color: rgb(255,255,255);
+    transition: 0.2s ease;
+    font-size: 15px;
+    position: relative;
+    z-index: 20;
 
-      @media (min-width: 1200px) {
-          font-size: 18px;
-          padding: 5px 0 0 0;
-      }
+    label {
+        vertical-align: middle;
+        line-height: 28px;
+        padding: 5px;
+        margin: 0;
+        width: 100%;
+    }
+
+    @media (min-width: 1200px) {
+        font-size: 18px;
+    }
+
+    &:hover {
+        background: #BF0B2C;
+    }
   }
 
   &__author-meta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 15;
-      margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    margin-bottom: 10px;
   }
 
 }
