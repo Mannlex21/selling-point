@@ -7,10 +7,13 @@ import {
   Form,
   FormGroup,
   Label,
+  Row,
+  Col,
   Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/itemActions';
+import { addItem } from '../../actions/itemActions';
+import './item-modal.scss';
 
 class ItemModal extends Component {
   state = {
@@ -77,43 +80,61 @@ class ItemModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="item">Item</Label>
-                <Input 
-                  type="text"
-                  name="sku"
-                  placeholder="sku"
-                  onChange={this.onChange}
-                ></Input>
-                <Input 
-                  type="text"
-                  name="name"
-                  placeholder="name"
-                  onChange={this.onChange}
-                ></Input>
-                <Input 
-                  type="text"
-                  name="description"
-                  placeholder="description"
-                  onChange={this.onChange}
-                ></Input>
-                <Input 
-                  type="number"
-                  name="quantity"
-                  placeholder="quantity"
-                  onChange={this.onChange}
-                ></Input>
-                <Input 
-                  type="number"
-                  name="purchase_price"
-                  placeholder="purchase_price"
-                  onChange={this.onChange}
-                ></Input>
-                <Input 
-                  type="number"
-                  name="sale_price"
-                  placeholder="sale_price"
-                  onChange={this.onChange}
-                ></Input>
+                <Row>
+                  <Col sm={6}>
+                    <Input 
+                      type="text"
+                      name="sku"
+                      placeholder="sku"
+                      onChange={this.onChange}
+                    ></Input>
+                  </Col>
+                  <Col sm={6}>
+                    <Input 
+                      type="text"
+                      name="name"
+                      placeholder="name"
+                      onChange={this.onChange}
+                    ></Input>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={6}>
+                    <Input 
+                      type="text"
+                      name="description"
+                      placeholder="description"
+                      onChange={this.onChange}
+                    ></Input>
+                  </Col>
+                  <Col sm={6}>
+                    <Input 
+                      type="number"
+                      name="quantity"
+                      placeholder="quantity"
+                      onChange={this.onChange}
+                    ></Input>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm={6}>
+                    <Input
+                      type="number"
+                      name="purchase_price"
+                      placeholder="purchase_price"
+                      onChange={this.onChange}
+                    ></Input>
+                  </Col>
+                  <Col sm={6}>
+                    <Input
+                      type="number"
+                      name="sale_price"
+                      placeholder="sale_price"
+                      onChange={this.onChange}
+                    ></Input>
+                  </Col>
+                </Row>
                 <Button
                   color="dark"
                   style={{marginTop: '2rem'}}

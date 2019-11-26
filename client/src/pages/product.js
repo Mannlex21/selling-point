@@ -3,7 +3,7 @@ import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/itemActions';
 import PropTypes from 'prop-types';
-import ItemModal from '../components/ItemModal';
+import ItemModal from '../components/item-modal/ItemModal';
 import ItemProduct from '../components/item-product';
 import '../assets/css/products.scss';
 
@@ -18,7 +18,6 @@ class Product extends Component {
 
     return (
       <div className="div-container">
-        <label>Productos</label>
         <ItemModal></ItemModal>
         <Row>
           {
