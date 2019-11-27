@@ -11,7 +11,7 @@ import ItemProduct from '../components/item-product';
 import '../assets/css/products.scss';
 
 class Product extends Component {
-  
+
   state = {
     modal: false,
     id: null,
@@ -56,18 +56,18 @@ class Product extends Component {
 
         <ItemModal
           modal={ this.state.modal }
-          onIdChange={ this.onChange } 
+          onIdChange={ this.onChange }
           toggle={ this.toggle }
-          idItem={ this.state.id } 
+          idItem={ this.state.id }
         ></ItemModal>
 
         <Row className="m-0">
           {
             items.map((item) => (
-              <ItemProduct 
-                onIdChange={ this.onChange } 
-                toggle={ this.toggle } 
-                key={ item._id } 
+              <ItemProduct
+                onIdChange={ this.onChange }
+                toggle={ this.toggle }
+                key={ item._id }
                 itemPassed={ item }
               ></ItemProduct>
             ))
