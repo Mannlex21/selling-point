@@ -3,7 +3,7 @@ import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/itemActions';
 import PropTypes from 'prop-types';
-import ItemModal from '../components/item-modal/ItemModal';
+import ItemModal from '../components/item-modal/item-modal';
 import ItemProduct from '../components/item-product';
 import '../assets/css/products.scss';
 
@@ -19,7 +19,7 @@ class Product extends Component {
     return (
       <div className="div-container">
         <ItemModal></ItemModal>
-        <Row>
+        <Row className="m-0">
           {
             items.map((item) => (
               <ItemProduct key={item._id} itemPassed={ item }></ItemProduct>

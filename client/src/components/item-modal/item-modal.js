@@ -51,23 +51,23 @@ class ItemModal extends Component {
         sale_price: this.state.sale_price,
       }
     }
-    console.log(newItem)
+
     // Add item via addItem action
     this.props.addItem(newItem);
 
     // Close modal
-    // this.toggle();
+    this.toggle();
   }
 
   render() {
     return (
-      <div>
+      <div className="div-item-modal">
         <Button
           color="dark"
-          style={{marginBottom: '2rem'}}
+          style={{marginBottom: '1rem'}}
           onClick={this.toggle}
         >
-          Add Item  
+          Agregar producto
         </Button>
 
         <Modal
@@ -75,43 +75,43 @@ class ItemModal extends Component {
           toggle={this.toggle}
         >
           <ModalHeader toggle={this.toggle}>
-            Add To Shopping List
+            Agregar producto
           </ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Row>
+              <FormGroup className="form-item-modal">
+                <Row >
                   <Col sm={6}>
-                    <Input 
+                    <Input
                       type="text"
                       name="sku"
-                      placeholder="sku"
+                      placeholder="SKU"
                       onChange={this.onChange}
                     ></Input>
                   </Col>
                   <Col sm={6}>
-                    <Input 
+                    <Input
                       type="text"
                       name="name"
-                      placeholder="name"
+                      placeholder="Nombre del producto"
                       onChange={this.onChange}
                     ></Input>
                   </Col>
                 </Row>
                 <Row>
                   <Col sm={6}>
-                    <Input 
+                    <Input
                       type="text"
                       name="description"
-                      placeholder="description"
+                      placeholder="Descripción"
                       onChange={this.onChange}
                     ></Input>
                   </Col>
                   <Col sm={6}>
-                    <Input 
+                    <Input
                       type="number"
                       name="quantity"
-                      placeholder="quantity"
+                      placeholder="Cantidad"
                       onChange={this.onChange}
                     ></Input>
                   </Col>
@@ -122,7 +122,7 @@ class ItemModal extends Component {
                     <Input
                       type="number"
                       name="purchase_price"
-                      placeholder="purchase_price"
+                      placeholder="Precio de compra"
                       onChange={this.onChange}
                     ></Input>
                   </Col>
@@ -130,7 +130,7 @@ class ItemModal extends Component {
                     <Input
                       type="number"
                       name="sale_price"
-                      placeholder="sale_price"
+                      placeholder="Precio de venta"
                       onChange={this.onChange}
                     ></Input>
                   </Col>
