@@ -15,6 +15,14 @@ router.get('/', (req, res) => {
     .then(items => res.json(items));
 });
 
+// @route   GET api/items/:id
+// @desc    Get All items
+// @access  Public
+router.get('/:id', (req, res) => {
+  Item.findById(req.params.id)
+    .then(items => res.json(items));
+});
+
 // @route   POST api/items
 // @desc    Create a item
 // @access  Public

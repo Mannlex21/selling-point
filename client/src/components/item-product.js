@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../actions/itemActions';
-import { Col } from 'react-bootstrap';
+import { getItems, deleteItem, getItem } from '../actions/itemActions';
+import { Col } from 'reactstrap';
 import cereal from '../assets/img/cereal.png';
 
 class ItemProduct extends Component {
-  state = {
-    buttons: false,
-  }
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {};
 
-  }
-
-  onViewOptions = param => event => {
-    this.setState({
-      active: !this.state.active
-    });
+    this.onViewClick = this.onViewClick.bind(this);
   }
 
   onDeleteClick = (id) => e => {
@@ -24,20 +18,21 @@ class ItemProduct extends Component {
   }
 
   onViewClick = (id) => e => {
-    // this.props.deleteItem(id);
+    this.props.onIdChange(id);
+    this.props.toggle();
   }
 
   onEditClick = (id) => e => {
-    // this.props.deleteItem(id);
+    this.props.toggle();
   }
 
   render() {
     const itemPassed = this.props.itemPassed;
 
     return (
-      <Col sm={2}>
+      <Col xs={6} sm={6} md={2}>
         <div className="div-item sh-container sh-effect--delta">
-          <div id={ itemPassed._id } className="div-product" onClick={this.onViewOptions(itemPassed)} >
+          <div id={ itemPassed._id } className="div-product" >
             <div className="div-img-product">
               <img src={ cereal } alt="cereal"></img>
             </div>
@@ -62,4 +57,4 @@ const mapStateToProps = (state) => ({
   item: state.item
 });
 
-export default connect(mapStateToProps, { getItems, deleteItem })(ItemProduct);
+export default connect(mapStateToProps, { getItems, deleteItem, getItem })(ItemProduct);

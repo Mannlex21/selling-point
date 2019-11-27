@@ -6,36 +6,76 @@ import {
   ModalBody,
   Form,
   FormGroup,
-  Label,
   Row,
   Col,
   Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from '../../actions/itemActions';
+import { addItem, getItem } from '../../actions/itemActions';
 import './item-modal.scss';
 
 class ItemModal extends Component {
-  state = {
-    modal: false,
-    sku: '',
-    name: '',
-    description: '',
-    quantity: null,
-    purchase_price: null,
-    sale_price: null
+  constructor(props){
+    super(props);
+
+    this.state = {
+      func1: this.func1.bind(this),
+      modal: false,
+      idItem: null,
+      sku: '',
+      name: '',
+      description: '',
+      quantity: '',
+      purchase_price: '',
+      sale_price: ''
+    }
   }
 
-  toggle = () => {
+  static getDerivedStateFromProps(props, state) {
+    if (props.idItem !== state.idItem) {
+      return { idItem: state.idItem, fun: state.func1(props.idItem) };
+    }
+    
+    return null;
+  }
+
+  func1 = (id) => {
+    if(id !== null) {
+      this.props.getItem(id).then(res=>{
+        this.setState({
+          sku: res.sku,
+          name: res.name,
+          description: res.description,
+          quantity: res.quantity,
+          purchase_price: res.pricing.purchase_price,
+          sale_price: res.pricing.sale_price
+        })
+      })
+    } else {
+      this.setState({
+        sku: '',
+        name: '',
+        description: '',
+        quantity: '',
+        purchase_price: '',
+        sale_price: ''
+      })
+    }
+
     this.setState({
-      modal: !this.state.modal
-    });
-  };
+      idItem: id,
+    })
+  }
 
   onChange = (e) => {
     const { name, value, type } = e.target;
 
     this.setState({ [name]: type === "number" ? parseInt(value, 10) : value });
+  };
+
+  toggle = () => {
+    // this.props.onIdChange(null);
+    this.props.toggle();
   };
 
   onSubmit = (e) => {
@@ -51,28 +91,23 @@ class ItemModal extends Component {
         sale_price: this.state.sale_price,
       }
     }
-
+    console.log(newItem)
     // Add item via addItem action
     this.props.addItem(newItem);
 
+    
     // Close modal
     this.toggle();
   }
 
   render() {
+    const showModal = this.props.modal;
+
     return (
       <div className="div-item-modal">
-        <Button
-          color="dark"
-          style={{marginBottom: '1rem'}}
-          onClick={this.toggle}
-        >
-          Agregar producto
-        </Button>
-
         <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle}
+          isOpen={showModal}
+          toggle={this.props.toggle}
         >
           <ModalHeader toggle={this.toggle}>
             Agregar producto
@@ -86,7 +121,8 @@ class ItemModal extends Component {
                       type="text"
                       name="sku"
                       placeholder="SKU"
-                      onChange={this.onChange}
+                      onChange={ this.onChange }
+                      value={ this.state.sku }
                     ></Input>
                   </Col>
                   <Col sm={6}>
@@ -95,6 +131,7 @@ class ItemModal extends Component {
                       name="name"
                       placeholder="Nombre del producto"
                       onChange={this.onChange}
+                      value={ this.state.name }
                     ></Input>
                   </Col>
                 </Row>
@@ -105,6 +142,7 @@ class ItemModal extends Component {
                       name="description"
                       placeholder="Descripción"
                       onChange={this.onChange}
+                      value={ this.state.description }
                     ></Input>
                   </Col>
                   <Col sm={6}>
@@ -113,6 +151,7 @@ class ItemModal extends Component {
                       name="quantity"
                       placeholder="Cantidad"
                       onChange={this.onChange}
+                      value={ this.state.quantity }
                     ></Input>
                   </Col>
                 </Row>
@@ -124,6 +163,7 @@ class ItemModal extends Component {
                       name="purchase_price"
                       placeholder="Precio de compra"
                       onChange={this.onChange}
+                      value={ this.state.purchase_price }
                     ></Input>
                   </Col>
                   <Col sm={6}>
@@ -132,6 +172,7 @@ class ItemModal extends Component {
                       name="sale_price"
                       placeholder="Precio de venta"
                       onChange={this.onChange}
+                      value={ this.state.sale_price }
                     ></Input>
                   </Col>
                 </Row>
@@ -155,4 +196,4 @@ const mapStateToProps = (state) => ({
   item: state.item
 });
 
-export default connect(mapStateToProps, { addItem })(ItemModal);
+export default connect(mapStateToProps, { addItem, getItem })(ItemModal);
