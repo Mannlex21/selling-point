@@ -13,6 +13,7 @@ import {
 import { connect } from 'react-redux';
 import { addItem, getItem } from '../../actions/itemActions';
 import './item-modal.scss';
+import { VIEW, UPDATE, ADD } from '../../actions/type_crud';
 
 class ItemModal extends Component {
   constructor(props){
@@ -35,7 +36,7 @@ class ItemModal extends Component {
     if (props.idItem !== state.idItem) {
       return { idItem: state.idItem, fun: state.func1(props.idItem) };
     }
-    
+
     return null;
   }
 
@@ -74,28 +75,51 @@ class ItemModal extends Component {
   };
 
   toggle = () => {
-    // this.props.onIdChange(null);
     this.props.toggle();
   };
 
   onSubmit = (e) => {
     e.preventDefault();
+    console.log(this.props)
 
-    const newItem = {
-      sku: this.state.sku,
-      name: this.state.name,
-      description: this.state.description,
-      quantity: this.state.quantity,
-      pricing: {
-        purchase_price: this.state.purchase_price,
-        sale_price: this.state.sale_price,
-      }
+    let newItem = null;
+
+    switch (this.props.type) {
+      case UPDATE:
+        newItem = {
+          _id: this.state.idItem,
+          sku: this.state.sku,
+          name: this.state.name,
+          description: this.state.description,
+          quantity: this.state.quantity,
+          pricing: {
+            purchase_price: this.state.purchase_price,
+            sale_price: this.state.sale_price,
+          }
+        }
+
+        break;
+      case ADD:
+        newItem = {
+          _id: null,
+          sku: this.state.sku,
+          name: this.state.name,
+          description: this.state.description,
+          quantity: this.state.quantity,
+          pricing: {
+            purchase_price: this.state.purchase_price,
+            sale_price: this.state.sale_price,
+          }
+        }
+
+        this.props.addItem(newItem);
+
+        break;
+
+      default:
+        break;
     }
-    console.log(newItem)
-    // Add item via addItem action
-    this.props.addItem(newItem);
 
-    // Close modal
     this.toggle();
   }
 

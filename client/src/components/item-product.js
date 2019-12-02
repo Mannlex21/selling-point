@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getItems, deleteItem, getItem } from '../actions/itemActions';
 import { Col } from 'reactstrap';
 import cereal from '../assets/img/cereal.png';
+import { VIEW, UPDATE, DELETE } from '../actions/type_crud';
 
 class ItemProduct extends Component {
 
@@ -18,11 +19,12 @@ class ItemProduct extends Component {
   }
 
   onViewClick = (id) => e => {
-    this.props.onIdChange(id);
+    this.props.onIdChange(id, VIEW);
     this.props.toggle();
   }
 
   onEditClick = (id) => e => {
+    this.props.onIdChange(id, UPDATE);
     this.props.toggle();
   }
 

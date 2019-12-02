@@ -41,6 +41,26 @@ router.post('/', (req, res) => {
     newItem.save().then(item => res.json(item));
 });
 
+// @route   POST api/items
+// @desc    Create a item
+// @access  Public
+router.put('/', (req, res) => {
+  console.log(req)
+  const newItem = new Item({
+    _id: req.body.id,
+    sku: req.body.sku,
+    name: req.body.name,
+    description: req.body.description,
+    quantity: req.body.quantity,
+    pricing: {
+      purchase_price: req.body.pricing.purchase_price,
+      sale_price: req.body.pricing.sale_price,
+    }
+  });
+
+  newItem.save().then(item => res.json(item));
+});
+
 // @route   DELETE api/items/:id
 // @desc    Delete a item
 // @access  Public

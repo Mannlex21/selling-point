@@ -9,11 +9,13 @@ import PropTypes from 'prop-types';
 import ItemModal from '../components/item-modal/item-modal';
 import ItemProduct from '../components/item-product';
 import '../assets/css/products.scss';
+import { ADD } from '../actions/type_crud';
 
 class Product extends Component {
 
   state = {
     modal: false,
+    type: '',
     id: null,
     buttons: false
   }
@@ -31,13 +33,15 @@ class Product extends Component {
   newItem = () => {
     this.setState({
       modal: !this.state.modal,
+      type: ADD,
       id: null
     });
   };
 
-  onChange = (id) => {
+  onChange = (id, type) => {
     this.setState({
-      id: id
+      id: id,
+      type: type
     });
   };
 
@@ -58,6 +62,7 @@ class Product extends Component {
           modal={ this.state.modal }
           onIdChange={ this.onChange }
           toggle={ this.toggle }
+          type={ this.state.type }
           idItem={ this.state.id }
         ></ItemModal>
 
