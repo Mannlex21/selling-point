@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
 // @route   POST api/items
 // @desc    Create a item
 // @access  Public
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
   console.log(req)
   const newItem = new Item({
     _id: req.body.id,

@@ -78,6 +78,11 @@ class ItemModal extends Component {
     this.props.toggle();
   };
 
+  isView = () => {
+    console.log(this.props.type === VIEW)
+    return this.props.type === VIEW;
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     console.log(this.props)
@@ -199,13 +204,15 @@ class ItemModal extends Component {
                     ></Input>
                   </Col>
                 </Row>
-                <Button
-                  color="dark"
-                  style={{marginTop: '2rem'}}
-                  block
-                >
-                  Add Item
-                </Button>
+                {!this.isView() &&
+                  <Button
+                    color="dark"
+                    style={{marginTop: '2rem'}}
+                    block
+                  >
+                    Add Item
+                  </Button>
+                }
               </FormGroup>
             </Form>
           </ModalBody>
@@ -219,4 +226,4 @@ const mapStateToProps = (state) => ({
   item: state.item
 });
 
-export default connect(mapStateToProps, { addItem, getItem })(ItemModal);
+export default connect(mapStateToProps, { addItem, updateItem, getItem })(ItemModal);

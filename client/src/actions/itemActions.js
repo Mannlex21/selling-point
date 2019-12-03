@@ -36,6 +36,10 @@ export const deleteItem = (id) => dispatch => {
   )
 };
 
+export const updateItem = (id, item) => dispatch => {
+  return axios.put(`/api/items/${ id }`, item).then(res => { return res.data})
+};
+
 export const setItemsLoading = () => {
   return {
     type: ITEMS_LOADING

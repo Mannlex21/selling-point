@@ -16,6 +16,7 @@ class ItemProduct extends Component {
 
   onDeleteClick = (id) => e => {
     this.props.deleteItem(id);
+    this.props.onIdChange(id, DELETE);
   }
 
   onViewClick = (id) => e => {
